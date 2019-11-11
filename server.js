@@ -2,10 +2,20 @@ let express = require("express");
 let morgan = require("morgan");
 let mongoose = require("mongoose");
 let path = require("path");
-
-
 let cheerio = require("cheerio");
 let axios = require("axios");
+let db = require("./models");
+let PORT = 3000;
+
+let app = express();
+// Use morgan logger for logging requests
+app.use(morgan("dev"));
+// Parse application body as JSON
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static("public"));
+
+app.use(express.static(path.join(__dirname, '/public')));
 
 // First, tell the console what server3.js is doing
 console.log("\n******************************************\n" +
