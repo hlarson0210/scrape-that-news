@@ -45,6 +45,17 @@ router.get("/scrape", function (req, res) {
         console.log(results);
         res.render("index");
     });
+});
+
+router.get("/saved-articles", function (req, res) {
+    db.Article.find({ read: true })
+        .then(dbArticle => {
+            res.json(dbArticle);
+        })
+        .catch(err => {
+            res.json(err);
+        })
+        .then(res.render("note"));
 })
 
 module.exports = router;
