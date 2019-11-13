@@ -6,56 +6,78 @@ let axios = require("axios");
 
 router.get("/", function (req, res) {
     db.Article.find({})
-        .then(function (dbArticle) {
-            res.json(dbArticle);
-        })
-        .catch(function (err) {
+        .then(data => {
+            let newsObj = {
+                Article: data
+            }
+            res.render("index", newsObj)
+        }).catch(function (err) {
             res.json(err);
-        })
-        .then(res.render("index"));
+        });
 });
 
 router.get("/scrape", function (req, res) {
-    // Make request via axios to grab the HTML from `awwards's` clean website section
-    axios.get("http://www.awwwards.com/websites/clean/").then(function (response) {
-
-        // Load the HTML into cheerio
+    axios.get("https://www.huffpost.com/").then(function (response) {
         let $ = cheerio.load(response.data);
 
-        // Make an empty array for saving our scraped info
-        let results = [];
+        $(".card__text").each(function (i, element) {
+            let scraped = {};
 
-        // With cheerio, look at each award-winning site, enclosed in "figure" tags with the class name "site"
-        $("figure.rollover").each(function (i, element) {
+            scraped.title = $(element).find(".card__headline__text").text();
+            scraped.summary = $(element).find(".card__description").text();
+            scraped.link = $(element).find(".card__headline").attr("href");
 
-            /* Cheerio's find method will "find" the first matching child element in a parent.
-             *    We start at the current element, then "find" its first child a-tag.
-             *    Then, we "find" the lone child img-tag in that a-tag.
-             *    Then, .attr grabs the imgs srcset value.
-             *    The srcset value is used instead of src in this case because of how they're displaying the images
-             *    Visit the website and inspect the DOM if there's any confusion
-            */
-            let imgLink = $(element).find("a").find("img").attr("data-srcset").split(",")[0].split(" ")[0];
-
-            // Push the image's URL (saved to the imgLink var) into the results array
-            results.push({ link: imgLink });
+            const query = {
+                title: scraped.title
+            };
+            const options = {
+                upsert: true,
+                setDefaultsOnInsert: true
+            };
+            db.Article.update(query, scraped, options)
+                .then(function(dbArticle) {
+                    console.log(dbArticle);
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
         });
-
-        // After looping through each element found, log the results to the console
-        console.log(results);
         res.render("index");
     });
+
 });
 
-router.get("/saved-articles", function (req, res) {
-    db.Article.find({ read: true })
+router.get("/api/drop", function (req, res) {
+    db.Article.remove({});
+    res.render("index");
+});
+
+router.get("/articles", (req, res) => {
+    db.Article.find({})
         .then(dbArticle => {
             res.json(dbArticle);
         })
         .catch(err => {
             res.json(err);
+        });
+});
+
+router.get("/saved-articles", function (req, res) {
+    db.Article.find({ saved: true })
+    res.render("note");
+});
+
+router.post("/saved-articles/:id", (req, res) => {
+    db.Note.create(req.body)
+        .then(dbNote => {
+            return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
         })
-        .then(res.render("note"));
-})
+        .then(dbArticle => {
+            res.json(dbArticle);
+        })
+        .catch(err => {
+            res.json(err);
+        });
+});
 
 module.exports = router;

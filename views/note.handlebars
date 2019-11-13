@@ -7,7 +7,8 @@
                 <ul class="right hide-on-med-and-down">
                     <li><a href="/">Home</a></li>
                     <li><a href="/saved-articles">Saved Articles</a></li>
-                    <li><button class="waves-effect waves-light btn beer-btn beer-me"><a href="/scrape">Beer me Articles</a></button>
+                    <li><button class="waves-effect waves-light btn beer-btn beer-me"><a href="/scrape">Beer me
+                                Articles</a></button>
                     </li>
                 </ul>
             </div>
@@ -26,11 +27,22 @@
     <div class="parallax"><img
             src="https://www.wallpaperup.com/uploads/wallpapers/2012/07/21/6690/46c0209307e2a2b7daa6fa14436c4d7e-700.jpg">
     </div>
-    <h1 class="parallaxText center">Saved News</h1>
+    <h1 class="parallaxText center">Saved Articles</h1>
 </div>
 
 <div class="container">
-
-
-
+    <div class="container">
+        <div class="row">
+            <ul class="collection">
+                {{!-- {{#each Article}} --}}
+                <li class="collection-item avatar">
+                    <i class="material-icons circle">folder</i>
+                    <span class="title">Title </span>
+                    <p>Description of article </p>
+                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                </li>
+                {{!-- {{/each}} --}}
+            </ul>
+        </div>
+    </div>
 </div>

@@ -9,7 +9,11 @@ let ArticleSchema = new Schema({
     },
     summary: {
         type: String,
-        required: true
+        required: false
+    },
+    link: {
+        type: String,
+        required: false
     },
     note: {
         type: Schema.Types.ObjectId,

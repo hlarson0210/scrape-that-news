@@ -11,8 +11,31 @@ $(document).ready(function() {
     $('.parallax').parallax();
     $('.sidenav').sidenav();
 
-    $(".beer-me").on("click", () => {
+    $(".beer-me").on("click", (event) => {
+        event.preventDefault();
         console.log("HEY");
-    })
+        $.ajax({
+            type: "GET",
+            url: "/scrape"
+        }).then(
+            function (data) {
+                location.reload();
+            }).catch(function (err) {
+                alert(err);
+            });
+    });
 
+
+    // $("#clear-articles").on("click", () => {
+    //     let data;
+
+    //     $.ajax("/api/drop", {
+    //         type: "POST",
+    //         data: data
+    //     }).then(
+    //         function () {
+    //             location.reload();
+    //         }
+    //     );
+    // });
 });

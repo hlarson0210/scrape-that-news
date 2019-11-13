@@ -13,6 +13,9 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use(express.static(path.join(__dirname, '/public')));
 
+
+mongoose.connect("mongodb://localhost/newsScraper", { useNewUrlParser: true });
+
 // Set Handlebars.
 var exphbs = require("express-handlebars");
 
