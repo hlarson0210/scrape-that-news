@@ -13,8 +13,10 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use(express.static(path.join(__dirname, '/public')));
 
+let MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
-mongoose.connect("mongodb://localhost/newsScraper", { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI);
+
 
 // Set Handlebars.
 var exphbs = require("express-handlebars");
