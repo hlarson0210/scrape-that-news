@@ -6,7 +6,7 @@ This application is based off of standard `MVC format` using the backing of `mon
 ## Using the Application
 * To use the application, follow this link: https://arcane-falls-10140.herokuapp.com/
 * Once you are on the site, you will be able to:
-1. Scrape the `Huffington Post`for new news articles
-2. View the scraped articles on the home page
-3. Save articles at will
-   * For saved articles, you will be able to add/delete notes
+  1. Scrape the `Huffington Post`for new news articles
+  2. View the scraped articles on the home page
+  3. Save articles at will
+    * For saved articles, you will be able to add/delete notes
