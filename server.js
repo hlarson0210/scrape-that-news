@@ -2,7 +2,7 @@ let express = require("express");
 let morgan = require("morgan");
 let mongoose = require("mongoose");
 let path = require("path");
-let PORT = 3000;
+let PORT = process.env.PORT || 3000;
 
 let app = express();
 // Use morgan logger for logging requests
