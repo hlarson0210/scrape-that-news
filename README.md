@@ -10,3 +10,16 @@ This application is based off of standard `MVC format` using the backing of `mon
   2. View the scraped articles on the home page
   3. Save articles at will
       1. For saved articles, you will be able to add/delete notes
+
+## Technologies Used
+* Node.js
+  * express
+  * express-handlebars
+  * mongoose
+  * cheerio
+  * axios
+  * path
+* mongoDB
+
+## Contributors
+Sole developer on the app.
