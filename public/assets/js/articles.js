@@ -7,7 +7,7 @@
 
 
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
-$(document).ready(function() {
+$(document).ready(function () {
     $('.parallax').parallax();
     $('.sidenav').sidenav();
 
@@ -25,17 +25,30 @@ $(document).ready(function() {
             });
     });
 
+    $("#clear-articles").on("click", () => {
+        let data;
 
-    // $("#clear-articles").on("click", () => {
-    //     let data;
+        $.ajax("/api/drop", {
+            type: "GET",
+            url: "/api/drop"
+        }).then(
+            function () {
+                location.reload();
+            }
+        );
+    });
 
-    //     $.ajax("/api/drop", {
-    //         type: "POST",
-    //         data: data
-    //     }).then(
-    //         function () {
-    //             location.reload();
-    //         }
-    //     );
-    // });
+    $("#favNow").on("click", () => {
+        event.preventDefault();
+        const articleId = $(this).parents(".avatar").attr("data-_id");
+        $.ajax({
+            method: "PUT",
+            url: "/api/articles/" + articleId
+        }).then(function (data) {
+            location.reload();
+        }).catch(function (err) {
+            alert(err);
+        });
+    })
+
 });

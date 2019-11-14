@@ -15,9 +15,13 @@ let ArticleSchema = new Schema({
         type: String,
         required: false
     },
-    note: {
+    note: [{
         type: Schema.Types.ObjectId,
         ref: "Note"
+    }],
+    saved: {
+        type: Boolean,
+        default: false
     }
 });
 

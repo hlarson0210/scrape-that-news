@@ -7,9 +7,8 @@
                 <ul class="right hide-on-med-and-down">
                     <li><a href="/">Home</a></li>
                     <li><a href="/saved-articles">Saved Articles</a></li>
-                    <li><a href="/api/drop" id="clear-articles">Clear Articles</a></li>
-                    <li><button class="waves-effect waves-light btn beer-btn beer-me"><a>Beer me
-                                Articles</a></button>
+                    <li><a id="clear-articles">Clear Articles</a></li>
+                    <li><button class="waves-effect waves-light btn beer-btn beer-me">Beer me Articles</button>
                     </li>
                 </ul>
             </div>
@@ -34,15 +33,15 @@
     <div class="row">
         {{#each Article}}
         <ul class="collection">
-            <li class="collection-item avatar">
+            <li class="collection-item avatar" data-_id={{this._id}}>
                 <i class="material-icons circle">question_answer</i>
-                <span class="title"><a href={{this.link}}>
-                        <h5>{{this.title}}</h5>
+                <span class="title"><a href={{link}}>
+                        <h5>{{title}}</h5>
                     </a></span>
                 <p>
                     <h6>{{this.summary}}</h6>
                 </p>
-                <a href="#!" class="secondary-content"><i class="material-icons">favorite_border</i></a>
+                <a href="#!" class="secondary-content"><i class="material-icons" id="favNow">favorite_border</i></a>
             </li>
         </ul>
         {{/each}}
