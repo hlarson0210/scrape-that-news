@@ -1,5 +1,4 @@
 // js file to...
-// scrape
 // add || delete note
 // save articles
 // view saved articles
@@ -26,8 +25,6 @@ $(document).ready(function () {
     });
 
     $("#clear-articles").on("click", () => {
-        let data;
-
         $.ajax("/api/drop", {
             type: "GET",
             url: "/api/drop"
@@ -38,7 +35,7 @@ $(document).ready(function () {
         );
     });
 
-    $("#favNow").on("click", () => {
+    $("#favNow").on("click", (event) => {
         event.preventDefault();
         const articleId = $(this).parents(".avatar").attr("data-_id");
         $.ajax({

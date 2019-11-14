@@ -33,16 +33,20 @@
 <div class="container">
     <div class="container">
         <div class="row">
+            {{#each Article}}
             <ul class="collection">
-                {{!-- {{#each Article}} --}}
-                <li class="collection-item avatar">
-                    <i class="material-icons circle">folder</i>
-                    <span class="title">Title </span>
-                    <p>Description of article </p>
-                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                <li class="collection-item avatar" data-_id={{_id}}>
+                    <i class="material-icons circle">question_answer</i>
+                    <span class="title"><a target="_blank" href={{link}}>
+                            <h5>{{title}}</h5>
+                        </a></span>
+                    <p>
+                        <h6>{{#if summary}}{{summary}}{{else}}No summary for this article{{/if}}</h6>
+                    </p>
+                    <a href="#!" class="secondary-content"><i class="material-icons" id="favNow">favorite_border</i></a>
                 </li>
-                {{!-- {{/each}} --}}
             </ul>
+            {{/each}}
         </div>
     </div>
 </div>

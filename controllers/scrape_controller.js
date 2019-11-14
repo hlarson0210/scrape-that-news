@@ -5,7 +5,9 @@ let cheerio = require("cheerio");
 let axios = require("axios");
 
 router.get("/", function (req, res) {
-    db.Article.find({})
+    db.Article.find({
+        saved: false
+    })
         .then(data => {
             let newsObj = {
                 Article: data
@@ -51,7 +53,6 @@ router.get("/api/drop", function (req, res) {
     db.Article.remove({}).then(function (data) {
         res.render("index");
     });
-
 });
 
 

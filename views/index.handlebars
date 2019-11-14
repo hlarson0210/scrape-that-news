@@ -33,13 +33,13 @@
     <div class="row">
         {{#each Article}}
         <ul class="collection">
-            <li class="collection-item avatar" data-_id={{this._id}}>
+            <li class="collection-item avatar" data-_id={{_id}}>
                 <i class="material-icons circle">question_answer</i>
-                <span class="title"><a href={{link}}>
+                <span class="title"><a target="_blank" href={{link}}>
                         <h5>{{title}}</h5>
                     </a></span>
                 <p>
-                    <h6>{{this.summary}}</h6>
+                    <h6>{{#if summary}}{{summary}}{{else}}No summary for this article{{/if}}</h6>
                 </p>
                 <a href="#!" class="secondary-content"><i class="material-icons" id="favNow">favorite_border</i></a>
             </li>
