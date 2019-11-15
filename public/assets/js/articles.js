@@ -35,13 +35,15 @@ $(document).ready(function () {
         );
     });
 
-    $("#favNow").on("click", (event) => {
+    $(".favNow").on("click", function (event) {
         event.preventDefault();
-        const articleId = $(this).parents(".avatar").attr("data-_id");
+        const articleId = $(this).parents(".collection").attr("data-_id");
+        console.log(articleId)
         $.ajax({
             method: "PUT",
             url: "/api/articles/" + articleId
         }).then(function (data) {
+            console.log(data);
             location.reload();
         }).catch(function (err) {
             alert(err);
