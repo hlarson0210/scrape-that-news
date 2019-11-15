@@ -48,6 +48,22 @@ $(document).ready(function () {
         }).catch(function (err) {
             alert(err);
         });
-    })
+    });
+
+    $(".unFavNow").on("click", function (event) {
+        event.preventDefault();
+        const articleId = $(this).parents(".collection").attr("data-_id");
+        console.log(articleId)
+        $.ajax({
+            method: "PUT",
+            url: "/api/saved-articles/" + articleId
+        }).then(function (data) {
+            console.log(data);
+            location.reload();
+        }).catch(function (err) {
+            alert(err);
+        });
+    });
+
 
 });

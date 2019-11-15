@@ -71,6 +71,20 @@ router.put("/api/articles/:id", (req, res) => {
     });
 });
 
+router.put("/api/saved-articles/:id", (req, res) => {
+    db.Article.findOneAndUpdate({
+        _id: req.params.id
+    }, {
+        $set: {
+            saved: false
+        }
+    }).then(function (newFav) {
+        res.json(newFav);
+    }).catch(function (err) {
+        res.json(err);
+    });
+});
+
 router.get("/saved-articles", function (req, res) {
     db.Article.find({
         saved: true
